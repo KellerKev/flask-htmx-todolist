@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from .models import User
 from . import db
+import random
 
 bp = Blueprint('auth_views', __name__, url_prefix='/auth')
 
@@ -14,8 +15,10 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        id = random.randint(1, 60000)
+
         
-        user = User(username, generate_password_hash(password))
+        user = User(id,username, generate_password_hash(password))
 
         message = {}
 
