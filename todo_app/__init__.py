@@ -22,7 +22,7 @@ def create_app():
         DEBUG = True,
         SECRET_KEY = 'd9d3e93eead4ddaa24436a0ed3b1dc6f47cbb9207b9b8ebd',
         #SQLALCHEMY_DATABASE_URI = 'sqlite:///app_data.db'
-        SQLALCHEMY_DATABASE_URI = '''snowflake://'''+snowuser+''':'''+snowpass+'''@'''snowaccount+'''/'''+snowdb+'''/'''+snowschema+'''?warehouse='''+snowwh+'''&role='''+snowrole
+        SQLALCHEMY_DATABASE_URI = '''snowflake://'''+snowuser+''':'''+snowpass+'''@'''+snowaccount+'''/'''+snowdb+'''/'''+snowschema+'''?warehouse='''+snowwh+'''&role='''+snowrole
     )
 
     # initialize the app with the extension SQLAlchemy
