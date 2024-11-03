@@ -14,6 +14,37 @@ snowwh = os.getenv('SNOWWH')
 snowrole = os.getenv('SNOWROLE')
 
 
+
+spcs=False
+
+spcs=os.getenv('SPCS')
+
+
+def get_login_token():
+  with open('/snowflake/session/token', 'r') as f:
+    return f.read()
+
+
+
+
+if spcs == True:
+
+            connection_url = URL(
+                        authenticator="oauth",
+                        token=get_login_token(),
+                        host=os.getenv('SNOWFLAKE_HOST'),
+                        account=os.getenv('SNOWFLAKE_ACCOUNT'),
+                        warehouse=snowwh,
+                        database=snowdb,
+                        schema=snowschema
+                    )
+        
+            SQLAlchemy_URI= connection_url
+else:  
+            SQLAlchemy_URI='''snowflake://'''+snowuser+''':'''+snowpass+'''@'''+snowaccount+'''/'''+snowdb+'''/'''+snowschema+'''?warehouse='''+snowwh+'''&role='''+snowrole
+   
+
+
 def create_app():
     app = Flask(__name__, static_folder="assets") # Ver Nota 1 abajo
 
@@ -22,7 +53,7 @@ def create_app():
         DEBUG = True,
         SECRET_KEY = 'd9d3e93eead4ddaa24436a0ed3b1dc6f47cbb9207b9b8ebd',
         #SQLALCHEMY_DATABASE_URI = 'sqlite:///app_data.db'
-        SQLALCHEMY_DATABASE_URI = '''snowflake://'''+snowuser+''':'''+snowpass+'''@'''+snowaccount+'''/'''+snowdb+'''/'''+snowschema+'''?warehouse='''+snowwh+'''&role='''+snowrole
+        SQLALCHEMY_DATABASE_URI = SQLAlchemy_URI
     )
 
     # initialize the app with the extension SQLAlchemy
