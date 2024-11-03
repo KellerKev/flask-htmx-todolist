@@ -1,8 +1,18 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 # Initialize the extension SQLAlchemy
 db = SQLAlchemy()
+
+snowuser = os.getenv('SNOWUSER')
+snowpass = os.getenv('SNOWPASS')
+snowaccount = os.getenv('SNOWACCOUNT')
+snowdb = os.getenv('SNOWDB')
+snowschema = os.getenv('SNOWSCHEMA')
+snowwh = os.getenv('SNOWWH')
+snowrole = os.getenv('SNOWROLE')
+
 
 def create_app():
     app = Flask(__name__, static_folder="assets") # Ver Nota 1 abajo
@@ -11,7 +21,8 @@ def create_app():
     app.config.from_mapping(
         DEBUG = True,
         SECRET_KEY = 'd9d3e93eead4ddaa24436a0ed3b1dc6f47cbb9207b9b8ebd',
-        SQLALCHEMY_DATABASE_URI = 'sqlite:///app_data.db'
+        #SQLALCHEMY_DATABASE_URI = 'sqlite:///app_data.db'
+        SQLALCHEMY_DATABASE_URI = '''snowflake://'''+snowuser+''':'''+snowpass+'''@'''snowaccount+'''/'''+snowdb+'''/'''+snowschema+'''?warehouse='''+snowwh+'''&role='''+snowrole
     )
 
     # initialize the app with the extension SQLAlchemy
