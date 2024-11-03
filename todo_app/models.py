@@ -11,7 +11,8 @@ class User(db.Model):
     )
     password: Mapped[str] = mapped_column(Text, nullable=False)
 
-    def __init__(self, username, password) -> None:
+    def __init__(self, id, username, password) -> None:
+        self.id = id
         self.username = username
         self.password = password
 
