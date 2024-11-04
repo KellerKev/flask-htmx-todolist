@@ -24,7 +24,8 @@ def create():
         description = request.form['description']
         
         id = random.randint(1, 60000)
-        todo = Todo(id, g.user.id, title, description)
+        status=False
+        todo = Todo(id, g.user.id, title, description,status)
 
         db.session.add(todo)
         db.session.commit()
