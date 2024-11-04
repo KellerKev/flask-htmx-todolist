@@ -15,7 +15,7 @@ snowrole = os.getenv('SNOWROLE')
 
 
 
-spcs=False
+spcs="False"
 
 spcs=os.getenv('SPCS')
 
@@ -27,7 +27,7 @@ def get_login_token():
 
 
 
-if spcs == True:
+if spcs == "True":
 
             connection_url = URL(
                         authenticator="oauth",
