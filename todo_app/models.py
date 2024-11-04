@@ -26,7 +26,7 @@ class Todo(db.Model):
     description: Mapped[str] = mapped_column(Text)
     status: Mapped[bool] = mapped_column(Boolean, default=False)
 
-    def __init__(self, created_by, title, description, status = False) -> None:
+    def __init__(self,id,created_by, title, description, status = False) -> None:
         self.id = id
         self.created_by = created_by
         self.title = title
