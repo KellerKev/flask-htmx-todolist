@@ -42,7 +42,17 @@ if spcs == "True":
         
             SQLAlchemy_URI= connection_url
 else:  
-            SQLAlchemy_URI='''snowflake://'''+snowuser+''':'''+snowpass+'''@'''+snowaccount+'''/'''+snowdb+'''/'''+snowschema+'''?warehouse='''+snowwh+'''&role='''+snowrole
+
+            connection_url = URL(
+                        user=snowuser,
+                        password=snowpass,
+                        account=snowaccount,
+                        warehouse=snowwh,
+                        database=snowdb,
+                        schema=snowschema,
+                        role=snowrole
+                    )
+            SQLAlchemy_URI= connection_url
    
 
 
