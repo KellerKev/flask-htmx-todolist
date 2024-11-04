@@ -5,6 +5,7 @@ from flask import (
 from .auth_views import login_required
 from .models import Todo
 from . import db
+import random
 
 bp = Blueprint('todo_views', __name__, url_prefix='/todo')
 
@@ -22,7 +23,9 @@ def create():
         title = request.form['title']
         description = request.form['description']
         
-        todo = Todo(g.user.id, title, description)
+        id = random.randint(1, 60000)
+        todo = Todo(id, g.user.id, title, description)
+
         db.session.add(todo)
         db.session.commit()
 
