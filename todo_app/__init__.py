@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 import os
+from snowflake.sqlalchemy import URL
 
 # Initialize the extension SQLAlchemy
 db = SQLAlchemy()
